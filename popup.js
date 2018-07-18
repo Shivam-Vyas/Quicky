@@ -56,7 +56,7 @@
         $('input').css("height",newHeight)
         $('input').css("margin-bottom",newMargin)
         $('input').css("font-size",newFontSize)
-        $('#selectSize').css("font-size",newFontSize+10+"px")
+    //    $('#selectSize').css("font-size",newFontSize+10+"px")
         /*html height
         body height
         font size
@@ -74,7 +74,7 @@
     })
     function setInputFont(){
         $('input').css("font-family",fontStyle[fontStyleNumber])
-        $('#selectFontStyle').css("font-family",fontStyle[fontStyleNumber])
+    //    $('#selectFontStyle').css("font-family",fontStyle[fontStyleNumber])
         
         chrome.storage.sync.set({fontStyleNumber: fontStyleNumber}, function() {});
         
@@ -144,7 +144,33 @@
         });    
     
     }
+    function setInputStyleById(id){
+        var val = selectedSize;
 
+        var newMargin,newHeight,newFontSize;
+        if(val === 0){
+            newMargin = baseMargin-3;
+            newHeight = baseHeight-5;
+            newFontSize= basefontSize-5;
+        }
+        else if(val === 1){
+            newMargin = baseMargin;
+            newHeight = baseHeight;
+            newFontSize= basefontSize;
+        }
+        else{
+                newMargin = baseMargin+3;
+                newHeight = baseHeight+5;
+                newFontSize= basefontSize+5;
+            
+        }
+        
+        $('#'+id).css("height",newHeight)
+        $('#'+id).css("margin-bottom",newMargin)
+        $('#'+id).css("font-size",newFontSize)
+        $('#'+id).css("font-family",fontStyle[fontStyleNumber])
+    
+    }
     function addInput(val){
         setHeight(incrementHeight)    
      
@@ -155,6 +181,7 @@
         tempInput[0].spellcheck = false;
 
         tempInput.insertBefore(currentInput);                 
+        setInputStyleById(tempInput[0].id);    
         setUpListeners(app.id)
        
         app.data.push(tempInput[0].value) 
@@ -198,6 +225,7 @@
             addInput(currentInput.value)
             app.data[0] = "";
             currentInput.value = "";
+            $('html body').animate({scrollTop:bodyheight},500);
             port.postMessage(app.data)
          
         }
@@ -236,18 +264,24 @@
         });
         
         chrome.storage.sync.get(['fontStyleSize'], function(result) {
-            selectedSize = result.fontStyleSize || 1; 
+            
+            selectedSize = result.fontStyleSize === undefined ? 1 : result.fontStyleSize; 
+            console.log(selectedSize);
+            
             setLayout(selectedSize);  
+            $('html body').animate({scrollTop:bodyheight},500);
+
         });
         
 
     }
 
-    getData()
-    getAndSetFontStyle()
+    getData();
+    getAndSetFontStyle();
     
     $("#current").focus();
     
+        
 })();
     // function getUpdateData(){
     //     let arr= [];
