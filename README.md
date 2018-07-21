@@ -1,6 +1,8 @@
-# Quicky
+### Quicky
 ###### Make Quick Note
+# 
 ### [Get Quicky](https://chrome.google.com/webstore/detail/quicky/mlalhniikaffhbnnmeedgodcbedjoghn)
+# 
 ##### Are you tired by switching tabs in browser?
 ##### Are just copy some urls/text at some place and  then go somewhere then again do same thing online?
 ##### Do you want to take any quick note?
