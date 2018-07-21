@@ -56,14 +56,6 @@
         $('input').css("height",newHeight)
         $('input').css("margin-bottom",newMargin)
         $('input').css("font-size",newFontSize)
-    //    $('#selectSize').css("font-size",newFontSize+10+"px")
-        /*html height
-        body height
-        font size
-        input height
-        input margin
-        incremental height
-        */ 
        chrome.storage.sync.set({fontStyleSize:val},()=>{});
  
     }
@@ -74,7 +66,6 @@
     })
     function setInputFont(){
         $('input').css("font-family",fontStyle[fontStyleNumber])
-    //    $('#selectFontStyle').css("font-family",fontStyle[fontStyleNumber])
         
         chrome.storage.sync.set({fontStyleNumber: fontStyleNumber}, function() {});
         
@@ -93,21 +84,16 @@
         if(cnt >= 0){
             var nextel = document.getElementById(cnt);
             nextel.focus();
-          //  console.log(nextel);
             
         }
     
     }
     function setUpListeners(id){
         var properId = "#"+id;
-      //  console.log(id);
         var el = document.getElementById(id);
         
         el.addEventListener('input', function() {
-           // console.log('Textarea Change');
-           // console.log(this);
             app.data[+this.id] = this.value;
-          //  console.log(app.data);
             port.postMessage(app.data)
         });
 
@@ -190,7 +176,6 @@
     }
     function getData(){
            chrome.storage.sync.get(['key'], function(result) {
-           // console.log('Value currently is ' + result.key);
         result.key = result.key || [];
         if(result.key.length>0){
             currentInput.value = result.key[0];
@@ -204,7 +189,6 @@
             
           }
           port.postMessage(app.data)
-      //   console.log(app.data);
                
         });
     }
@@ -242,7 +226,6 @@
     }
     currentInput.addEventListener('focus',function(event){
         event.preventDefault();
-      //  console.log(this);
         var that = this;
         setTimeout(function(){
             that.setSelectionRange(that.value.length*2,that.value.length*2);
@@ -250,10 +233,7 @@
          
     });
     currentInput.addEventListener('input', function() {
-       // console.log('Textarea Change');
-      //  console.log(this);
         app.data[0] = this.value;
-     //   console.log(app.data);
         port.postMessage(app.data)
     });
     
@@ -283,45 +263,4 @@
     
         
 })();
-    // function getUpdateData(){
-    //     let arr= [];
-    //     $('div input').each(function(){
-    //         if(this.id != "current"){
-    //             arr.push(this.value)
-    //         }     
-    //     })
-    //     return arr;
-    // }
-
-
-    // tempInput[0].onkeydown = function(event){
-        //  var key = event.keyCode;
-        //  if(key === 46){
-        //      app.data[+this.id] = "delete"
-        //      console.log(app.data);
-             
-        //      this.remove();
-        //      setHeight(-30)    
-        //  }
-        // }
-    
-                                         
-            // clearTimeout(timeoutId);
-            // timeoutId = setTimeout(function() {
-        
-            // }, 1000);
-    
-                // currentInput.addEventListener('keypress',(event)=>{
-    //    let key = event.key;
-    //    if(key === "Enter" && !isEmpty()){
-    //    addInput(currentInput.value)
-    //    port.postMessage(app.data)
-       
-    //    currentInput.value = "";
-    // }
-    // })
-
-     // setTimeout(function(){
-            //     nextel.setSelectionRange(nextel.value.length*2,nextel.value.length*2);
-            // },0)
-           
+  
